@@ -1,49 +1,40 @@
-Goto Kafka installation directory `# cd /usr/local/kafka/bin`
+### Goto Kafka installation directory
+    # cd /usr/local/kafka/bin
 
-`# cat ../config/zookeeper.properties 
-dataDir=/var/lib/zookeeper
-clientPort=2181
-maxClientCnxns=0
-admin.enableServer=false
-tickTime=2000
-`
-
-Start Zookeeper server
-`# ./zookeeper-server-start.sh ../config/zookeeper.properties`
+    # cat ../config/zookeeper.properties 
+    dataDir=/var/lib/zookeeper
+    clientPort=2181
+    maxClientCnxns=0
+    admin.enableServer=false
+    tickTime=2000
 
 
-On another terminal
-`# ./kafka-server-start.sh ../config/server.properties`
+### Start Zookeeper server
+    # ./zookeeper-server-start.sh ../config/zookeeper.properties`
 
 
-Verify Java processes
-`root@prasad-udesk:~# jps
-2536 Kafka
-1661 QuorumPeerMain
-3023 Jps
-`
+### Start Kafka Server
+    # ./kafka-server-start.sh ../config/server.properties`
 
 
-List Topics
---
-root@prasad-udesk:/usr/local/kafka/bin# ./kafka-topics.sh --list --zookeeper localhost:2181
-__consumer_offsets
-test
+#### Verify Java processes
+    root@prasad-udesk:~# jps
+    2536 Kafka
+    1661 QuorumPeerMain
+    3023 Jps
 
 
-Start Consumer
----
-root@prasad-udesk:/usr/local/kafka/bin# ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
-test 1
+### List Kafka Topics
+    root@prasad-udesk:/usr/local/kafka/bin# ./kafka-topics.sh --list --zookeeper localhost:2181
+    __consumer_offsets
+    test
 
-Start Producer
---
-root@prasad-udesk:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list localhost:9092 --topic test
->test 1
->test 2
->3
->4
->5
->6
->
+### Start Kafka Consumer
+    root@prasad-udesk:/usr/local/kafka/bin# ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+    test 1
 
+### Start Kafka Producer
+    root@prasad-udesk:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list localhost:9092 --topic test
+    >test 1
+    >test 2
+    >
